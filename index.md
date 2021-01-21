@@ -59,7 +59,7 @@ On the UI Side, we have an embeddable iframe container which can be embedded usi
 ```
 
 | Name | Description | Example |
-| :---         |     :---:      |          ---: |
+| :---         |     :---:      |          :--- |
 | REFERAPP_URL   | URL For plugin app     | https://refer-ui-two.vercel.app/    |
 | APP_REDIRECT_URL     | url of page where the app can redirect users back after the invites are sent using google contacts       | http://fb.com/explore      |
 | APP_BASE_URL     | base url which will be used in the emails sent to the users, it should refer to the landing page for the users clicking on link sent in email,the redirect_uri is the url of page       | http://fb.com/signup     |
