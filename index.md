@@ -55,9 +55,18 @@ On the UI Side, we have an embeddable iframe container which can be embedded usi
   sandbox="allow-top-navigation allow-scripts allow-same-origin allow-forms" 
   height="500px" 
   width="800px" 
-  src={`${REFERAPP_URL}?email=${email}&name=${name}&base_url=${APP_BASE_URL}&redirect_uri="http://localhost:3000/explore"&token=${token}`} />
+  src={`${REFERAPP_URL}?email=${email}&name=${name}&base_url=${APP_BASE_URL}&redirect_uri=${APP_REDIRECT_URL}&token=${token}`} />
 ```
-### NOTE: Here REFERAPP_URL points to https://refer-ui-two.vercel.app/ and email is the email of logged in used user, name is the name of logged in user, APP_BASE_URL is the base url which will be used in the emails sent to the users, it should refer to the landing page for the users clicking on link sent in email,the redirect_uri is the url of page where the app can redirect users back after the invites are sent using google contacts, and the token is the token obtained from `/refer-api-auth` endpoint above.
+
+| Name | Description | Example |
+| :---         |     :---:      |          ---: |
+| REFERAPP_URL   | URL For plugin app     | https://refer-ui-two.vercel.app/    |
+| APP_REDIRECT_URL     | url of page where the app can redirect users back after the invites are sent using google contacts       | http://fb.com/explore      |
+| APP_BASE_URL     | base url which will be used in the emails sent to the users, it should refer to the landing page for the users clicking on link sent in email,the redirect_uri is the url of page       | http://fb.com/signup     |
+| name     | name of logged in user       | John Doe      |
+| email     | email of logged in user       | johndoe@gmail.com      |
+| token     | token obtained from `/refer-api-auth` endpoint above       | Bearer eyxv....      |
+
 
 when a new user signs up with referral code, call the method signupMySDK with the session token, this will mark the user signed_up on our system
 
