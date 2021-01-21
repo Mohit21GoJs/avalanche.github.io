@@ -16,7 +16,18 @@ The components of avalanche app are:
 ### Flow diagram for simple email invite
 ![Normal-Flow-Diagram](./Flow-Normal.png)
 
+### Using Avalanche SDK
 
-### Support or Contact
+First step is to sign up on [customer app](https://refer-customer-dashboard.vercel.app/) and grab your `client_id` and `client_secret`.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Once you have the credentials, setup a route on server side
+
+This route will be providing you a session token with your secret credentials and that token will be used to idenitfy the request your app will make to our api
+
+On ui embed the invite app through iframe and pass in parameters like email, token and redirect url
+
+when a new user signs up with referral code, call the method signupMySDK with the session token, this will mark the user signed_up on our system
+
+when a new user reaches a premium level, call the premium sdk method
+
+when a user reaches upgraded mark him upgraded by calling our sdk method
