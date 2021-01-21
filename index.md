@@ -86,8 +86,52 @@ We use client side cookie to set this referral code so set this field in your in
 
 For further flow we will be using the above cookie to get referral code.
 
+For setting up client side SDK:
 
+```
+  const avalancheBrowser = require('avalanche-browser');
+```
+or if you use ES7/TS or above 
+
+```
+  import avalancheBrowser from 'avalanche-browser'
+```
+ 
+Also make a util method for storing the Api Token above on UI Side:
+```
+const getApiToken = async () => {
+  const resp = await fetch('http://localhost:4000/refer-api-auth', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+        }
+    }
+  );
+  const result = await resp.json();
+  localStorage.setItem('api_token', result.token);
+  return result.token;
+}
+```
+
+In our backend we have 2 events.
+
+1.) Sign Up.
+
+2.) Upgrade to Premium.
+
+
+When user signs up, after a successful signup you can call the method below
+
+```
+  avalancheBrowser.signUpMyAppSdk({ email: 'loggedinuser@company.com', authReferApiToken: localStorage.getItem('api_token'); });
+```
 
 when a new user reaches a premium level, call the premium sdk method
 
-when a user reaches upgraded mark him upgraded by calling our sdk method
+```
+  avalancheBrowser.premiumEventMyAppSdkV2({
+        email: 'loggedinuser@company.com',
+        token: localStorage.getItem('token'),
+        authReferApiToken: localStorage.getItem('api_token')
+  });
+```
