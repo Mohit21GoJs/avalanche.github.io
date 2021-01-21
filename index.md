@@ -67,8 +67,26 @@ On the UI Side, we have an embeddable iframe container which can be embedded usi
 | email     | email of logged in user       | johndoe@gmail.com      |
 | token     | token obtained from `/refer-api-auth` endpoint above       | Bearer eyxv....      |
 
+Next flow for invite and redirections are handled by our plugin app, once a user receives the mail and clicks on the link he will be redirected to `${APP_BASE_URL}?refAPI_ref_code=1234`
 
-when a new user signs up with referral code, call the method signupMySDK with the session token, this will mark the user signed_up on our system
+We use client side cookie to set this referral code so set this field in your index.html or entry point of your app.
+
+```
+  function getUrl(){
+      const searchParams = new URLSearchParams(window.location.search);
+      return searchParams.get('refAPI_ref_code')
+  }
+  window.addEventListener('load', (event) => {
+      const ref_code = getUrl();
+      if(ref_code){
+        document.cookie = `refAPI_ref_code=${ref_code}`;
+      }
+ });
+```
+
+For further flow we will be using the above cookie to get referral code.
+
+
 
 when a new user reaches a premium level, call the premium sdk method
 
