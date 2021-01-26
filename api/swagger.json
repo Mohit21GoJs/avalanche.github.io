@@ -93,6 +93,134 @@
           }
         }
       }
+    },
+    "/events/sign_up_by_email": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Sign up for user by email event",
+        "description": "This endpoint is used to trigger sign up by email event",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body for email invite",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignupEvent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    },
+    "/events/premium_event": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Trigger premium event",
+        "description": "This endpoint is used to trigger premium event, the event can be any action that a user has to complete to become a premium member of the app",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body for premium event",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremiumEvent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/PremimuResponse"
+            }
+          }
+        }
+      }
+    },
+    "/events/give_reward": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Trigger Give reward event",
+        "description": "his endpoint is used to trigger give reward event, the event can be any action that a user has to complete to get the reward on the app",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body for give reward",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GiveRewardEvent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/GiveRewardResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users_with_premium": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get all premium users",
+        "description": "This endpoint is used to fetch all premium users on the app",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "required": true,
+            "type": "string",
+            "description": "The email of logged in user"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -103,6 +231,88 @@
     }
   },
   "definitions": {
+    "CommonEvent": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "email ofuser"
+        }
+      }
+    },
+    "SignupEvent": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonEvent"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "referral_code": {
+              "type": "string",
+              "description": "email ofuser"
+            }
+          }
+        }
+      ]
+    },
+    "PremiumEvent": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonEvent"
+        }
+      ]
+    },
+    "GiveRewardEvent": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonEvent"
+        }
+      ]
+    },
+    "UsersWithPremium": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonEvent"
+        }
+      ]
+    },
+    "PremimuResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonEvent"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "overall_status": {
+              "type": "string",
+              "example": "sucesfully upgraded to premium"
+            }
+          }
+        }
+      ]
+    },
+    "GiveRewardResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/CommonEvent"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "overall_status": {
+              "type": "string",
+              "example": "sucesfully upgraded to premium"
+            },
+            "referrers_email": {
+              "type": "string",
+              "description": "email of the referrer"
+            }
+          }
+        }
+      ]
+    },
     "Commoninvite": {
       "type": "object",
       "properties": {
