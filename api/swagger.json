@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is the documentation for avalanche api",
+    "description": "This is the documentation for avalanche api \n# Authentication\nWith every request you must send the `Authorization` header which is a JWT which can be generated with your `client_id` and `client_secret` when you subscribe to the app.\n\n  \n<!-- ReDoc-Inject: <security-definitions> -->\n",
     "version": "1.0.0",
     "title": "Avalanche API",
     "contact": {
